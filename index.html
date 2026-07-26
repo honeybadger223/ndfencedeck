@@ -109,36 +109,47 @@
           <p class="eyebrow">Recent work</p>
           <h2>Projects</h2>
         </div>
-        <!-- pos-* classes shift the crop so the subject stays in frame on tall/wide sources -->
+        <!-- pos-* classes shift the crop so the subject stays in frame on tall/wide
+             sources. Each tile is a button so the lightbox is keyboard reachable. -->
         <div class="gallery">
           <figure>
-            <img src="images/deck_build.jpg" class="pos-lower"
-                 alt="Composite deck with black horizontal cable railing and stairs"
-                 loading="lazy" decoding="async">
+            <button class="tile" type="button">
+              <img src="images/deck_build.jpg" class="pos-lower"
+                   alt="Composite deck with black horizontal cable railing and stairs"
+                   loading="lazy" decoding="async">
+            </button>
             <figcaption><em>Deck</em>Composite deck &amp; cable railing</figcaption>
           </figure>
           <figure>
-            <img src="images/coastline-timbertech-azek.jpg"
-                 alt="Ground-level composite deck in TimberTech AZEK Coastline"
-                 loading="lazy" decoding="async">
+            <button class="tile" type="button">
+              <img src="images/coastline-timbertech-azek.jpg"
+                   alt="Ground-level composite deck in TimberTech AZEK Coastline"
+                   loading="lazy" decoding="async">
+            </button>
             <figcaption><em>Deck</em>TimberTech AZEK, Coastline</figcaption>
           </figure>
           <figure>
-            <img src="images/cedar_fence.jpg" class="pos-mid"
-                 alt="Cedar privacy fence with an arched gate under a cedar arbor"
-                 loading="lazy" decoding="async">
+            <button class="tile" type="button">
+              <img src="images/cedar_fence.jpg" class="pos-mid"
+                   alt="Cedar privacy fence with an arched gate under a cedar arbor"
+                   loading="lazy" decoding="async">
+            </button>
             <figcaption><em>Fence</em>Cedar fence &amp; arbor gate</figcaption>
           </figure>
           <figure>
-            <img src="images/custom_bench_and_deck.jpg"
-                 alt="Composite deck with a built-in bench running along one edge"
-                 loading="lazy" decoding="async">
+            <button class="tile" type="button">
+              <img src="images/custom_bench_and_deck.jpg"
+                   alt="Composite deck with a built-in bench running along one edge"
+                   loading="lazy" decoding="async">
+            </button>
             <figcaption><em>Deck</em>Custom built-in bench</figcaption>
           </figure>
           <figure>
-            <img src="images/new_stairs_and_railing.jpg" class="pos-lower"
-                 alt="New stained stairs with a wire mesh infill railing at a side entry"
-                 loading="lazy" decoding="async">
+            <button class="tile" type="button">
+              <img src="images/new_stairs_and_railing.jpg" class="pos-lower"
+                   alt="New stained stairs with a wire mesh infill railing at a side entry"
+                   loading="lazy" decoding="async">
+            </button>
             <figcaption><em>Stairs</em>Stairs &amp; wire mesh railing</figcaption>
           </figure>
         </div>
@@ -229,6 +240,21 @@
     </div>
   </footer>
 
+  <!-- LIGHTBOX -->
+  <dialog class="lightbox" id="lightbox" aria-label="Project photo viewer">
+    <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
+    <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
+    <figure class="lb-stage">
+      <img id="lbImg" alt="">
+      <figcaption>
+        <em id="lbKind"></em>
+        <span id="lbCaption"></span>
+        <span class="lb-count" id="lbCount"></span>
+      </figcaption>
+    </figure>
+  </dialog>
+
   <script>
     const toggle = document.getElementById('navToggle');
     const nav = document.getElementById('siteNav');
@@ -239,6 +265,64 @@
     nav.addEventListener('click', e => {
       if (e.target.tagName === 'A') nav.classList.remove('open');
     });
+
+    /* ---- gallery lightbox ---- */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbKind = document.getElementById('lbKind');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbCount = document.getElementById('lbCount');
+    const tiles = [...document.querySelectorAll('.gallery .tile')];
+    let current = 0;
+
+    function show(i) {
+      current = (i + tiles.length) % tiles.length;
+      const img = tiles[current].querySelector('img');
+      const cap = tiles[current].parentElement.querySelector('figcaption');
+      const kind = cap.querySelector('em');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      // the <em> category and the title are separate runs, not one string
+      lbKind.textContent = kind ? kind.textContent.trim() : '';
+      lbCaption.textContent = [...cap.childNodes]
+        .filter(n => n.nodeType === Node.TEXT_NODE)
+        .map(n => n.textContent).join('').trim();
+      lbCount.textContent = (current + 1) + ' / ' + tiles.length;
+    }
+
+    tiles.forEach((tile, i) => {
+      tile.addEventListener('click', () => {
+        show(i);
+        lb.showModal();
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+
+    function close() { lb.close(); }
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', () => show(current - 1));
+    document.getElementById('lbNext').addEventListener('click', () => show(current + 1));
+
+    // anywhere that is not the photo, its caption, or a control closes the viewer
+    lb.addEventListener('click', e => {
+      if (!e.target.closest('img, figcaption, .lb-btn')) close();
+    });
+    lb.addEventListener('close', () => { document.documentElement.style.overflow = ''; });
+
+    lb.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+    });
+
+    // swipe on touch screens
+    let touchX = null;
+    lb.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive: true});
+    lb.addEventListener('touchend', e => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 45) show(current + (dx < 0 ? 1 : -1));
+      touchX = null;
+    }, {passive: true});
   </script>
 </body>
 </html>
