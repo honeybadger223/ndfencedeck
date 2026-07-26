@@ -1,4 +1,4 @@
-# ND Fence & Deck - static site
+# N&D Fence and Deck - static site
 
 Plain HTML + CSS, one tiny inline script for the mobile nav. No build step, no framework.
 
