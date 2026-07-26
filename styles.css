@@ -296,8 +296,10 @@ a { color: var(--pine); }
 /* ---------- gallery ---------- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  /* 280px floor holds this to 3 columns at desktop: five photos land 3 + 2
+     rather than 4 + 1 orphan */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem 1.6rem;
 }
 .gallery figure {
   margin: 0;
@@ -399,6 +401,38 @@ a { color: var(--pine); }
 .contact-details a:hover { color: #E9C592; }
 .contact-meta { font-weight: 400 !important; font-size: 0.95rem !important; color: #8FAF9D; margin-top: 1rem !important; }
 
+/* ---------- socials ---------- */
+.socials { margin-top: 2.25rem; }
+.socials-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8FAF9D;
+  margin-bottom: 0.9rem;
+}
+.social-links { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.62rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.93rem;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.social:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+.social svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+
 .contact-form {
   background: var(--white);
   border-radius: var(--radius);
@@ -465,6 +499,25 @@ a { color: var(--pine); }
 .footer-inner p { margin: 0; }
 .footer-inner a { color: var(--white); text-decoration: none; font-weight: 500; }
 .footer-inner a:hover { color: #E9C592; }
+
+.footer-social { display: flex; gap: 0.6rem; }
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #DCE7E0;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.footer-social a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+}
+.footer-social svg { width: 16px; height: 16px; fill: currentColor; }
 
 /* ---------- lightbox ---------- */
 .lightbox {
