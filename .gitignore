@@ -1,3 +1,10 @@
 # WSL writes these next to files copied in from Windows
 *:Zone.Identifier
 .DS_Store
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
