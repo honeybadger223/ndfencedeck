@@ -50,10 +50,11 @@
             <a class="btn btn-line" href="#gallery">See recent work</a>
           </div>
         </div>
-        <!-- Swap the div for:
-             <img class="hero-photo" src="images/hero.jpg" alt="Finished cedar deck"> -->
         <div class="hero-frame">
-          <div class="hero-photo placeholder"><span>Featured project photo</span></div>
+          <img class="hero-photo hero-photo--flip"
+               src="images/cedar_fence_rebuild_main.jpg"
+               alt="The N&amp;D crew in front of a newly rebuilt cedar privacy fence"
+               fetchpriority="high" decoding="async">
         </div>
       </div>
       <div class="container">
@@ -108,32 +109,37 @@
           <p class="eyebrow">Recent work</p>
           <h2>Projects</h2>
         </div>
-        <!-- Swap each placeholder div for:
-             <img src="images/project-1.jpg" alt="Describe the project"> -->
+        <!-- pos-* classes shift the crop so the subject stays in frame on tall/wide sources -->
         <div class="gallery">
           <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Fence</em>Cedar privacy fence</figcaption>
+            <img src="images/deck_build.jpg" class="pos-lower"
+                 alt="Composite deck with black horizontal cable railing and stairs"
+                 loading="lazy" decoding="async">
+            <figcaption><em>Deck</em>Composite deck &amp; cable railing</figcaption>
           </figure>
           <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Deck</em>Composite deck &amp; railing</figcaption>
+            <img src="images/coastline-timbertech-azek.jpg"
+                 alt="Ground-level composite deck in TimberTech AZEK Coastline"
+                 loading="lazy" decoding="async">
+            <figcaption><em>Deck</em>TimberTech AZEK, Coastline</figcaption>
           </figure>
           <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Fence</em>Horizontal slat fence</figcaption>
+            <img src="images/cedar_fence.jpg" class="pos-mid"
+                 alt="Cedar privacy fence with an arched gate under a cedar arbor"
+                 loading="lazy" decoding="async">
+            <figcaption><em>Fence</em>Cedar fence &amp; arbor gate</figcaption>
           </figure>
           <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Deck</em>Deck stairs &amp; landing</figcaption>
+            <img src="images/custom_bench_and_deck.jpg"
+                 alt="Composite deck with a built-in bench running along one edge"
+                 loading="lazy" decoding="async">
+            <figcaption><em>Deck</em>Custom built-in bench</figcaption>
           </figure>
           <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Repair</em>Gate rebuild</figcaption>
-          </figure>
-          <figure>
-            <div class="placeholder"><span>Photo</span></div>
-            <figcaption><em>Refinish</em>Deck refinish</figcaption>
+            <img src="images/new_stairs_and_railing.jpg" class="pos-lower"
+                 alt="New stained stairs with a wire mesh infill railing at a side entry"
+                 loading="lazy" decoding="async">
+            <figcaption><em>Stairs</em>Stairs &amp; wire mesh railing</figcaption>
           </figure>
         </div>
       </div>

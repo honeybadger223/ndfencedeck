@@ -23,9 +23,18 @@ Formspree works the same way if you prefer it (free tier is 50 submissions/month
 
 ## Things to swap before launch
 
-- Logo: drop `logo.png` (or .svg, just update the src) into `/images`. It shows in the header automatically; if the file is missing the text brand displays instead
 - Service area text (currently "Greater Puget Sound area")
-- Hero: swap the placeholder band for a real project photo (comment in the HTML shows how)
-- Gallery: drop photos into `/images` and replace each placeholder div with an `<img>` tag
 - Hours, warranty terms, license line in the footer
+
+## Photos
+
+The hero is `images/cedar_fence_rebuild_main.jpg`; the gallery uses the other five
+project photos. To add a gallery tile, copy a `<figure>` block in the Gallery section
+and point it at a new file in `/images`.
+
+Two CSS crop helpers are available on gallery images, for tall phone photos where a
+centre crop would land on the sky: `class="pos-mid"` and `class="pos-lower"`.
+
+Source photos are 300 KB to 850 KB straight off a phone. Worth running them through
+squoosh.app (resize to ~1600px wide, WebP or JPEG q75) before launch.
 # ndfencedeck

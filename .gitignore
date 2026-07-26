@@ -1,0 +1,3 @@
+# WSL writes these next to files copied in from Windows
+*:Zone.Identifier
+.DS_Store
