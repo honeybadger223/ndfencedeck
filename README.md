@@ -24,7 +24,6 @@ Formspree works the same way if you prefer it (free tier is 50 submissions/month
 ## Things to swap before launch
 
 - Logo: drop `logo.png` (or .svg, just update the src) into `/images`. It shows in the header automatically; if the file is missing the text brand displays instead
-- Phone number and email in the Contact section and `tel:`/`mailto:` links
 - Service area text (currently "Greater Puget Sound area")
 - Hero: swap the placeholder band for a real project photo (comment in the HTML shows how)
 - Gallery: drop photos into `/images` and replace each placeholder div with an `<img>` tag
